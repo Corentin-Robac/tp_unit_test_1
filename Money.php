@@ -1,19 +1,28 @@
 <?php
-class Vegetable {
+class Money {
 
     // Datas
-    public $data1;
+    public $amount;
+    public $currency;
 
     // Constructor
-    public function __construct( $data1 = "green")
+    public function __construct($amount, $currency)
     {
-        $this->elementData = $data1;
+        $this->amount = $amount;
+        $this->currency = $currency;
     }
 
     // Methods
-    public function getData()
+    public function  __toString()
     {
-        return $this->data;
+        return $this->amount . ' ' . $this->currency;
+    }
+
+    public function add(Money $that)
+    {
+        if ($this->currency !== $that->currency) {
+            throw new Exception("Devises différentes");
+        }
+        return new Money($this->amount + $that->amount, $this->currency);   
     }
 }
-?>
